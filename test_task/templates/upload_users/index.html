@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static %}
+<div class="main-box cotaner text-center mt-6">
+    <br>
+    <h2>My Users</h2>
+    {% if user.username == 'admin' %}
+        <a class="btn btn-sm btn-success" href="/upload/">Upload Users</a>
+        <br><br>
+    {% endif %}
+</div>
+<div class="card my">
+    <div class="card-body">
+        <h5 class="card-title">My user info:</h5>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <p class="card-text">
+            <table class="table my_table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Avatar</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Date of joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                        <tr>
+                            <th scope="row">{{ user.id }}.</th>
+                            <td><img src="{{ user.avatar }}" alt="{{ user.username }}" style="border-radius: 50%" height="75" width="75"></td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.date_joined }}</td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </p>
+    </div>
+</div>
+<style>
+    .my_table{
+        width: 85%;
+        margin: auto;
+    }
+</style>
+
+{% endblock content %}
