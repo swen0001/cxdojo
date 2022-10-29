@@ -12,7 +12,7 @@ class MyUser(models.Model):
 
 class Files(models.Model):
     file_csv = models.FileField(upload_to='csv')
-    # file_xml = models.FileField(upload_to='xml')
+    file_xml = models.FileField(upload_to='xml')
     uploaded = models.DateTimeField(auto_now_add=True)
     activated = models.BooleanField(default=False)
 

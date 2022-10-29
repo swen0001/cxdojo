@@ -16,7 +16,14 @@
 
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form }}
+                <div class="mb-3" style="text-align: center">
+                    <label class="form-label">Choose the CSV file: </label>
+                    {{ form.file_csv }}
+                </div>
+                <div class="mb-3" style="text-align: center">
+                    <label class="form-label">Choose the XML file:</label>
+                    {{ form.file_xml }}
+                </div>
                 <hr>
                 <div style="text-align: center">
                 <button class="btn btn btn-success" type="submit">Upload</button>

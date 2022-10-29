@@ -1,9 +1,8 @@
-import csv
-
 from django.shortcuts import render
+
 from .models import MyUser, Files
 from .forms import FilesModelForm
-import csv
+from .parsing import parsing_csv, parsing_xml
 
 
 def index(request):
@@ -18,22 +17,33 @@ def upload(request):
         form.save()
         form = FilesModelForm()
         obj = Files.objects.get(activated=False)
-        with open(obj.file_csv.path, 'r') as f:
-            reader = csv.reader(f)
-            for i, row in enumerate(reader):
-                if i == 0:
-                    pass
+        list_csv = parsing_csv(obj.file_csv.path)
+        list_xml = parsing_xml(obj.file_xml.path)
+        i = -1
+        user_list = []
+        for lx in list_xml:
+            i += 1
+            for lc in list_csv:
+                if lx[1] in lc[0]:
+                    y = list_csv.index(lc)
+                    user_list.append(list_xml[i] + list_csv[y])
                 else:
-                    if row[0] == '' or row[1] == '' or row[2] == '':
-                        pass
-                    else:
-                        username = row[0]
-                        password = row[1]
-                        date_joined = row[2]
-                        MyUser.objects.create(
-                            username=username,
-                            password=password,
-                            date_joined=date_joined,
-                        )
-            obj.activated = True
+                    pass
+        for row in user_list:
+            first_name = row[0]
+            last_name = row[1]
+            avatar = row[2]
+            username = row[3]
+            password = row[4]
+            date_joined = row[5]
+            MyUser.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                avatar=avatar,
+                username=username,
+                password=password,
+                date_joined=date_joined,
+            )
+        obj.activated = True
+        obj.save()
     return render(request, 'upload_users/upload.html', {'form': form})
