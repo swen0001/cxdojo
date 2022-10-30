@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 
 from .models import MyUser, Files
 from .forms import FilesModelForm
@@ -46,4 +47,5 @@ def upload(request):
             )
         obj.activated = True
         obj.save()
+        messages.success(request, 'Users successfully uploaded!')
     return render(request, 'upload_users/upload.html', {'form': form})

@@ -7,7 +7,21 @@
     <br>
     <h2>Upload Users</h2>
 </div>
+    <!-- Message -->
+    <div>
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <script>
+                    var m = "{{ message }}";
+                    swal("Perfect!", m, "success");
+                </script>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- END Message -->
     <br>
+    <!-- Form -->
     <div class="card my" style="max-width: 40%; margin: auto;">
     <div class="card-body">
         <h5 class="card-title">Upload files</h5>
@@ -31,6 +45,7 @@
               </form>
         </p>
     </div>
+    <!-- END Form -->
 </div>
 
 {% endblock %}
