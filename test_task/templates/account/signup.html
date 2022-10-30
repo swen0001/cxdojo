@@ -1,0 +1,52 @@
+{% extends 'account/base_account.html' %}
+{% block content %}
+<body class="text-center">
+<!-- Message -->
+    <div>
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <script>
+                    var m = "{{ message }}";
+                    swal("Error!", m, "error");
+                </script>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- END Message -->
+    <main class="my_form-signup">
+  <form id="form1" action="/account/signup" method="post">
+    {% csrf_token %}
+    <img class="mb-4" src="https://upload.wikimedia.org/wikipedia/commons/3/37/Contacts_iOS.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 fw-normal">Please, REGISTER</h1>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+      <label for="username">Username<span class="text-danger">*</span></label>
+      <div id="name_mess" class="mess"></div>
+    </div>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+      <label for="email">Email<span class="text-danger">*</span></label>
+      <div id="email_mess" class="mess"></div>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" required>
+      <label for="password1">Password<span class="text-danger">*</span></label>
+      <div id="password1_mess" class="mess"></div>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password2" name="password2" placeholder="Password" required>
+      <label for="password2">Repeat the password<span class="text-danger">*</span></label>
+      <div id="password2_mess" class="mess"></div>
+    </div>
+    <br>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">SIGN UP</button>
+    <br>
+    <br>
+    <p>I have an <a href="/account/signin">account</a></p>
+    <hr>
+    <p class="mt-5 mb-3 text-muted"><a href="http://www.cxdojo.com" target="_blank">CXDojo</a> or <a href="/">Home</a></p>
+  </form>
+</main>
+</body>
+{% endblock content %}

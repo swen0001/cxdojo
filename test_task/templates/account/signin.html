@@ -1,0 +1,84 @@
+{% extends 'account/base_account.html' %}
+{% block content %}
+  <body class="text-center">
+<!-- Message -->
+    <div>
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <script>
+                    var m = "{{ message }}";
+                    swal("Warning!", m, "warning");
+                </script>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- END Message -->
+<main class="form-signin">
+  <form action="/account/signin" method="post">
+    {% csrf_token %}
+    <img class="mb-4" src="https://upload.wikimedia.org/wikipedia/commons/3/37/Contacts_iOS.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 fw-normal">Please, LOG IN</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="username" name="username" placeholder="user123" required>
+      <label for="name">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" name="password" placeholder="qwerty123" required>
+      <label for="pass1">Password</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">LOG IN</button>
+    <br>
+    <br>
+    <p>I don`t have an <a href="/account/signup">account</a></p>
+    <hr>
+    <p class="mt-5 mb-3 text-muted"><a href="http://www.cxdojo.com" target="_blank">CXDojo</a> or <a href="/">Home</a></p>
+  </form>
+</main>
+
+
+
+  </body>
+  <style>
+    html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+  </style>
+{% endblock content %}
