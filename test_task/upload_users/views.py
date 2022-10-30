@@ -17,9 +17,11 @@ def upload(request):
     if form.is_valid():
         form.save()
         form = FilesModelForm()
+
         obj = Files.objects.get(activated=False)
         list_csv = parsing_csv(obj.file_csv.path)
         list_xml = parsing_xml(obj.file_xml.path)
+        # comparison of xml and csv files
         i = -1
         user_list = []
         for lx in list_xml:
@@ -30,6 +32,7 @@ def upload(request):
                     user_list.append(list_xml[i] + list_csv[y])
                 else:
                     pass
+        # creating users from the received data
         for row in user_list:
             first_name = row[0]
             last_name = row[1]

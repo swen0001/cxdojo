@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html
+
 from .models import MyUser, Files
 
 
@@ -10,6 +12,11 @@ class MyUserAdmin(admin.ModelAdmin):
         "last_name",
         "username",
         "date_joined",
+    )
+    list_display_links = (
+        "first_name",
+        "last_name",
+        "username",
     )
 
 

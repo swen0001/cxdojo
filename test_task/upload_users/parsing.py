@@ -3,6 +3,7 @@ import csv
 
 
 def parsing_xml(file_xml_path: str) -> list:
+    """The function of getting data from a xml file"""
     tree = ET.parse(file_xml_path)
     first_tag = tree.getroot()
     user_list = first_tag.find('user')
@@ -22,6 +23,7 @@ def parsing_xml(file_xml_path: str) -> list:
 
 
 def parsing_csv(file_csv_path: str) -> list:
+    """The function of getting data from a csv file"""
     with open(file_csv_path, 'r') as f:
         list_csv = []
         reader = csv.reader(f)
